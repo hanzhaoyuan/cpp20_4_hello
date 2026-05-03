@@ -1,0 +1,9 @@
+# CMake 构建产物
+build/
+.cache/
+
+# clangd / IDE 缓存（如果有人把 compile_commands.json 软链到根目录）
+compile_commands.json
+
+# 个人本地预设，每个开发者自己管自己的，不入库
+CMakeUserPresets.json
