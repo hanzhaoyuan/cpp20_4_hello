@@ -1,6 +1,6 @@
-#include <greeter/greeter.hpp>
-
 #include <format>
+
+#include <greeter/greeter.hpp>
 
 namespace greeter {
 
@@ -11,4 +11,4 @@ std::string greet(std::string_view name) {
     return std::format("Hello, {}! (built with C++20)", name);
 }
 
-}  // namespace greeter
+} // namespace greeter
