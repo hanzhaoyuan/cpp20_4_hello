@@ -1,6 +1,6 @@
-#include <format>
-
 #include <greeter/greeter.hpp>
+
+#include <format>
 
 namespace greeter {
 

@@ -1,17 +1,44 @@
 # C/C++ 排版以此文件为唯一依据；保存时由 .vscode/settings.json 触发 clang-format。
-BasedOnStyle: LLVM
-IndentWidth: 4
-ColumnLimit: 100
-InsertNewlineAtEOF: true
+# 手动格式化：clang-format -i <file>
+BasedOnStyle:  LLVM
+IndentWidth:   4
+ColumnLimit:   100
 
-# 头文件顺序：先其它尖括号（标准库等），再本仓库的 <greeter/...>，最后双引号头。
-# IncludeCategories 按自上而下「首个匹配的 Regex」归类；Priority 越小越靠前。
-SortIncludes: CaseSensitive
-IncludeBlocks: Regroup
+InsertNewlineAtEOF:    true
+PointerAlignment:      Right
+SpaceInEmptyBlock:     false
+MaxEmptyLinesToKeep:   1
+NamespaceIndentation:  None
+FixNamespaceComments:  true
+AlwaysBreakTemplateDeclarations: Yes
+Cpp11BracedListStyle:  true
+
+# -------------------------------------------------------------------------
+# include 排序与分组（每组之间空一行，Priority 越小越靠前）
+#
+#   Priority 1  本项目头 <greeter/...>      （含配对头，排在最前）
+#   Priority 2  C 系统头 <xxx.h>
+#   Priority 3  C++ 标准库 / 第三方 <string>
+#   Priority 4  双引号头 "detail.hpp"
+#
+# 原则（参考 Google C++ Style Guide）：
+#   配对头 / 同模块头放首位，后接系统头，再接标准库，最后是私有头。
+# 注意：更具体的 Regex 必须排在 ^< 之前，否则会被 ^< 提前捕获。
+# -------------------------------------------------------------------------
+SortIncludes:          CaseSensitive
+IncludeBlocks:         Regroup
+IncludeIsMainRegex:    ([-_](test|unittest))?$
+
 IncludeCategories:
-  - Regex: '^<greeter/'
-    Priority: 2
-  - Regex: '^<'
+  # 本项目头（须放在 ^< 之前；Priority 1 使其排在标准库前）
+  - Regex:    '^<greeter/'
     Priority: 1
-  - Regex: '^"'
+  # C 系统头（带 .h 后缀，如 <unistd.h>）
+  - Regex:    '^<[a-z_/]+\.h>'
+    Priority: 2
+  # C++ 标准库 / 第三方尖括号头
+  - Regex:    '^<'
     Priority: 3
+  # 双引号头（相对路径或私有实现头）
+  - Regex:    '^"'
+    Priority: 4
