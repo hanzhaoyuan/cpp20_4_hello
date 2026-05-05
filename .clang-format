@@ -3,3 +3,15 @@ BasedOnStyle: LLVM
 IndentWidth: 4
 ColumnLimit: 100
 InsertNewlineAtEOF: true
+
+# 头文件顺序：先其它尖括号（标准库等），再本仓库的 <greeter/...>，最后双引号头。
+# IncludeCategories 按自上而下「首个匹配的 Regex」归类；Priority 越小越靠前。
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<greeter/'
+    Priority: 2
+  - Regex: '^<'
+    Priority: 1
+  - Regex: '^"'
+    Priority: 3
