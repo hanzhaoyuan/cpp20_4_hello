@@ -16,13 +16,12 @@ Cpp11BracedListStyle:  true
 # -------------------------------------------------------------------------
 # include 排序与分组（每组之间空一行，Priority 越小越靠前）
 #
-#   Priority 1  本项目头 <greeter/...>      （含配对头，排在最前）
-#   Priority 2  C 系统头 <xxx.h>
-#   Priority 3  C++ 标准库 / 第三方 <string>
+#   Priority 1  C 系统头 <xxx.h>
+#   Priority 2  C++ 标准库 / 第三方 <string>
+#   Priority 3  本项目头 <greeter/...>
 #   Priority 4  双引号头 "detail.hpp"
 #
-# 原则（参考 Google C++ Style Guide）：
-#   配对头 / 同模块头放首位，后接系统头，再接标准库，最后是私有头。
+# 原则：系统/标准库优先于本项目头。
 # 注意：更具体的 Regex 必须排在 ^< 之前，否则会被 ^< 提前捕获。
 # -------------------------------------------------------------------------
 SortIncludes:          CaseSensitive
@@ -30,15 +29,15 @@ IncludeBlocks:         Regroup
 IncludeIsMainRegex:    ([-_](test|unittest))?$
 
 IncludeCategories:
-  # 本项目头（须放在 ^< 之前；Priority 1 使其排在标准库前）
+  # 本项目头（须放在 ^< 之前；否则会被 ^< 提前匹配）
   - Regex:    '^<greeter/'
-    Priority: 1
+    Priority: 3
   # C 系统头（带 .h 后缀，如 <unistd.h>）
   - Regex:    '^<[a-z_/]+\.h>'
-    Priority: 2
+    Priority: 1
   # C++ 标准库 / 第三方尖括号头
   - Regex:    '^<'
-    Priority: 3
+    Priority: 2
   # 双引号头（相对路径或私有实现头）
   - Regex:    '^"'
     Priority: 4
