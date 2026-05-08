@@ -5,7 +5,7 @@ IndentWidth:   4
 ColumnLimit:   100
 
 InsertNewlineAtEOF:    true
-PointerAlignment:      Right
+PointerAlignment:      Left
 SpaceInEmptyBlock:     false
 MaxEmptyLinesToKeep:   1
 NamespaceIndentation:  None
