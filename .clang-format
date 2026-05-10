@@ -2,6 +2,8 @@
 # 手动格式化：clang-format -i <file>
 BasedOnStyle:  LLVM
 IndentWidth:   4
+# public:/private:/protected: 与 class/struct 关键字左对齐（须与 IndentWidth 同绝对值）
+AccessModifierOffset: -4
 ColumnLimit:   100
 
 InsertNewlineAtEOF:    true
@@ -12,6 +14,11 @@ NamespaceIndentation:  None
 FixNamespaceComments:  true
 AlwaysBreakTemplateDeclarations: Yes
 Cpp11BracedListStyle:  true
+
+# 短函数 / 短复合语句不要挤在一行（如 int main() { return 0; } 应拆成多行）
+AllowShortFunctionsOnASingleLine: None
+AllowShortLambdasOnASingleLine: None
+AllowShortBlocksOnASingleLine:    Never
 
 # 头文件区域之后、相邻顶层函数/类/命名空间定义之间插入空行
 SeparateDefinitionBlocks: Always
