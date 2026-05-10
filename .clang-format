@@ -13,6 +13,9 @@ FixNamespaceComments:  true
 AlwaysBreakTemplateDeclarations: Yes
 Cpp11BracedListStyle:  true
 
+# 头文件区域之后、相邻顶层函数/类/命名空间定义之间插入空行
+SeparateDefinitionBlocks: Always
+
 # -------------------------------------------------------------------------
 # include 排序与分组（每组之间空一行，Priority 越小越靠前）
 #

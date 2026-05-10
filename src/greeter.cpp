@@ -3,6 +3,7 @@
 #include <greeter/greeter.hpp>
 
 namespace greeter {
+
 std::string greet(std::string_view name) {
     // std::format 是 C++20 引入的类型安全格式化设施，
     // 语义上等价于 Python 的 f-string、Rust 的 format!。
